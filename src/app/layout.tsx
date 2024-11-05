@@ -6,7 +6,7 @@ import theme from "@/app/theme";
 import type { Metadata } from "next";
 import "./globals.css";
 import { CssBaseline } from "@mui/material";
-import Head from "next/head";
+import Header from "@/components/header";
 
 const publicSans = Public_Sans({
   weight: ["300", "400", "500", "700"],
@@ -18,7 +18,7 @@ const publicSans = Public_Sans({
 export const metadata: Metadata = {
   title: "Home On The Go",
   description: "Home Page",
-  icons: [ { url: "/logo.svg" } ],
+  icons: [{ url: "/logo.svg" }],
 };
 
 export default function RootLayout({
@@ -29,9 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={publicSans.variable}>
       <body>
-        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+        <AppRouterCacheProvider>
           <CssBaseline />
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <Header />
+            {children}
+          </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

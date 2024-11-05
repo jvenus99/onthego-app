@@ -13,11 +13,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { CloseOutlined, MoreVert } from "@mui/icons-material";
+import { CloseOutlined, MoreVert, Notifications } from "@mui/icons-material";
 import Image from "next/image";
 
 import "./styles.css";
-import theme from "@/app/theme";
 import DropdownMenu from "../dropdown-menu";
 
 const navItems = [
@@ -115,8 +114,24 @@ export default function Header() {
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <AppBar component="nav">
+    <Box
+      sx={{
+        display: "flex",
+        position: "fixed",
+        top: 0,
+        width: "100%",
+        zIndex: 1000,
+        height: "auto",
+      }}
+    >
+      <AppBar
+        component="nav"
+        sx={{
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+          borderBottom: "1px solid",
+          borderColor: (theme) => theme.palette.secondary.light,
+        }}
+      >
         <Toolbar>
           <Image
             className="logo"
@@ -136,6 +151,24 @@ export default function Header() {
           </IconButton>
           <Box
             sx={{
+              display: { xs: "flex", sm: "flex", md: "none" },
+              flexGrow: 1,
+            }}
+          />
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            // onClick={handleDrawerToggle}
+            sx={{
+              mr: "6px !important",
+              display: { md: "none" },
+              float: "right",
+            }}
+          >
+            <Notifications />
+          </IconButton>
+          <Box
+            sx={{
               display: { xs: "none", sm: "none", md: "flex", gap: "12px" },
             }}
           >
@@ -148,7 +181,12 @@ export default function Header() {
               </Button>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 1 }} />
+          <Box
+            sx={{
+              display: { xs: "none", sm: "none", md: "flex" },
+              flexGrow: 1,
+            }}
+          />
           <Box
             sx={{
               display: {

@@ -1,10 +1,10 @@
-import Header from "@/components/header";
+"use client";
+import ResumeSection from "@/components/resume-section";
 
 export default function Home() {
   return (
-    <div>
-      <Header />
-      <main>On The GO!</main>
-    </div>
+    <main>
+      <ResumeSection />
+    </main>
   );
 }
