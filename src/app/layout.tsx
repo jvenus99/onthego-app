@@ -1,11 +1,9 @@
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Public_Sans } from "next/font/google";
-import { ThemeProvider } from "@mui/material/styles";
+import { CssBaseline, ThemeProvider, GlobalStyles } from "@mui/material";
 import theme from "@/app/theme";
 
 import type { Metadata } from "next";
-import "./globals.css";
-import { CssBaseline } from "@mui/material";
 import Header from "@/components/header";
 
 const publicSans = Public_Sans({
@@ -32,6 +30,16 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <CssBaseline />
           <ThemeProvider theme={theme}>
+            <GlobalStyles
+              styles={{
+                body: {
+                  backgroundColor: "#EEF2F3",
+                  margin: 0,
+                  padding: 0,
+                  boxSizing: "border-box",
+                },
+              }}
+            />
             <Header />
             {children}
           </ThemeProvider>

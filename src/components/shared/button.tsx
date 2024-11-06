@@ -4,16 +4,17 @@ import Button from "@mui/material/Button";
 
 interface ButtonProps {
   backgroundColor?: string;
-  text: string;
+  text?: string;
   icon?: React.ReactNode;
   sx?: SxProps<Theme>;
+  variant?: "contained" | "outlined" | "text";
 }
 
 export default function ButtonComponent(props: ButtonProps) {
   const theme = useTheme();
   return (
     <Button
-      variant="contained"
+      variant={props.variant ? props.variant : "contained"}
       sx={{
         p: 6,
         borderRadius: "4px",

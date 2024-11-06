@@ -39,7 +39,7 @@ export default function DropdownMenu(props: DropdownMenuProps) {
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "right",
+          horizontal: "left",
         }}
         keepMounted
         transformOrigin={{
@@ -62,10 +62,9 @@ export default function DropdownMenu(props: DropdownMenuProps) {
             onClick={handleClose}
             sx={{
               color: theme.palette.primary.main,
-              p: "12px !important",
             }}
           >
-            <Box sx={{ margin: "16px" }}>{item}</Box>
+            <Box sx={{ margin: "2px" }}>{item}</Box>
           </MenuItem>
         ))}
       </Menu>

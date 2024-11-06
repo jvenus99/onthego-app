@@ -17,7 +17,7 @@ import { CloseOutlined, MoreVert, Notifications } from "@mui/icons-material";
 import Image from "next/image";
 
 import "./styles.css";
-import DropdownMenu from "../dropdown-menu";
+import DropdownMenu from "../shared/dropdown-menu";
 
 const navItems = [
   "pesquisa",

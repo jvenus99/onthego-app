@@ -1,10 +1,10 @@
 "use client ";
 import { Box, Typography, useTheme } from "@mui/material";
-import ResumeCard from "@/components/resume-card";
-import ProgessCircle from "@/components/progress-circle";
-import ProgressBar from "@/components/progress-bar";
+import ResumeCard from "@/components/resume/resume-card";
+import ProgessCircle from "@/components/shared/progress-circle";
+import ProgressBar from "@/components/shared/progress-bar";
 import Image from "next/image";
-import ButtonComponent from "@/components/button";
+import ButtonComponent from "@/components/shared/button";
 import { Add } from "@mui/icons-material";
 
 const cards = [
@@ -55,7 +55,7 @@ export default function ResumeSection() {
               mt: 6,
               display: "flex",
               flexWrap: "wrap",
-              gap: 6,
+              gap: 8,
             }}
           >
             {cards.map((card, index) => (

@@ -26,7 +26,7 @@ export default function BasicCard(props: Props) {
       sx={{
         background: theme.palette.primary.light,
         width: { xs: "100%", sm: "100%", md: "229px" },
-        height: "171px",
+        height: { xs: "171px", sm: "171px", md: "200px" },
       }}
     >
       {props.active && (
@@ -34,7 +34,7 @@ export default function BasicCard(props: Props) {
           sx={{ float: "right", width: "14px", pr: 2, color: "#0AD2A5" }}
         />
       )}
-      <CardContent sx={{ p: 8 }}>
+      <CardContent sx={{ px: 10, pb: 15 }}>
         <Typography
           variant="h4"
           sx={{ color: theme.palette.secondary.main, mb: 6 }}
