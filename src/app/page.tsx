@@ -58,11 +58,11 @@ export default function Home() {
               <MyResearches items={data.researches.myresearches} />
               <Box
                 sx={{
-                  mx: { md: "5%" },
+                  ml: { md: "32px" },
                   height: "auto",
                   width: { xl: "80%" },
                   display: { md: "flex" },
-                  gap: 14,
+                  gap: {xl: 14},
                 }}
               >
                 <CreditsSection

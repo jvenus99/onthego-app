@@ -15,7 +15,7 @@ export default function ShotsSection(props: Props) {
         sx={{
           mt: "5%",
           pt: "12px",
-          mx: { xs: 8, sm: 8, md: "10%" },
+          mx: { xs: 8, sm: 8, xl: "10%" },
           px: 10,
           pb: 10,
           height: "auto",
