@@ -1,8 +1,8 @@
-import { Box, useTheme, Typography, Divider, Button } from "@mui/material";
-import { ArrowForward, Email } from "@mui/icons-material";
+import { Box, useTheme, Typography, Divider } from "@mui/material";
+import { Email } from "@mui/icons-material";
 import ButtonComponent from "../shared/button";
 
-interface Props{
+interface Props {
   sended: number;
   balance: number;
 }

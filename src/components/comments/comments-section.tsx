@@ -102,7 +102,7 @@ export default function CommentsSection(props: Props) {
           >
             Hoje
           </Typography>
-          {props.items.map((item, index) => (
+          {props.items.map((item) => (
             <CommentsCard key={item.id} item={item} />
           ))}
         </Box>

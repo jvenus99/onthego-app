@@ -13,26 +13,6 @@ interface CardProps {
   scripting: number;
 }
 
-const cards = [
-  {
-    activeNumbers: 0,
-    totalNumbers: 5,
-    subTitle: "Pesquisas em campo",
-    footerComponent: <ProgessCircle activeNumbers={0} totalNumbers={5} />,
-    active: true,
-  },
-  {
-    activeNumbers: 300,
-    subTitle: "Pesquisas em roteirização",
-  },
-  {
-    activeNumbers: 2000,
-    totalNumbers: 10000,
-    subTitle: "Disparos feitos",
-    footerComponent: <ProgressBar activeNumbers={2000} totalNumbers={10000} />,
-  },
-];
-
 export default function ResumeSection(props: CardProps) {
   const theme = useTheme();
   return (

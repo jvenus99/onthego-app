@@ -1,9 +1,6 @@
 import { useState, useRef, TouchEvent, useEffect } from "react";
-import { Box, Button, IconButton, Typography } from "@mui/material";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Box, Button } from "@mui/material";
 import ResearchCard from "@/components/researches/research-card";
-import { set } from "react-hook-form";
 
 interface CarouselItem {
   name: string;
@@ -106,7 +103,7 @@ export default function Carousel({ items }: CarouselProps) {
           gap: 6,
         }}
       >
-        {items.map((item, index) => (
+        {items.map((item) => (
           <ResearchCard
             key={item.id}
             sx={{

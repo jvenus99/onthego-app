@@ -1,6 +1,5 @@
 import { Box, Typography } from "@mui/material";
 import Carousel from "@/components/researches/carousel";
-import { use, useEffect } from "react";
 
 interface Item {
   name: string;
@@ -11,14 +10,6 @@ interface Item {
 interface Props {
   items: Item[];
 }
-
-// const items = [
-//   { title: "Card 1", status: "active" },
-//   { title: "Card 2", status: "draft" },
-//   { title: "Card 3", status: "active" },
-//   { title: "Card 4", status: "active" },
-//   { title: "Ver todas", status: "none" },
-// ];
 
 export default function MyResearches(props: Props) {
   return (

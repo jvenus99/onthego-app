@@ -12,7 +12,6 @@ interface ProgressBarProps {
 
 export default function ProgessBar(props: ProgressBarProps) {
   const { totalNumbers, activeNumbers } = props;
-  const theme = useTheme();
 
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
