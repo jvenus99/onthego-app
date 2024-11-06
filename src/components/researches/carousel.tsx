@@ -1,11 +1,13 @@
-import { useState, useRef, TouchEvent } from "react";
+import { useState, useRef, TouchEvent, useEffect } from "react";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ResearchCard from "@/components/researches/research-card";
+import { set } from "react-hook-form";
 
 interface CarouselItem {
-  title: string;
+  name: string;
+  id: number;
   status: string;
 }
 
@@ -15,6 +17,7 @@ interface CarouselProps {
 
 export default function Carousel({ items }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [numberScroll, setNumberScroll] = useState<number>(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
@@ -36,6 +39,28 @@ export default function Carousel({ items }: CarouselProps) {
     }
   };
 
+  useEffect(() => {
+    const getSizeContainer = () => {
+      if (carouselRef.current) {
+        const containerWidth = carouselRef.current.clientWidth;
+        const containerHeight = carouselRef.current.clientHeight;
+        carouselRef.current.style.height = `${containerHeight}px`;
+
+        setNumberScroll(
+          Math.ceil((cardWidth * (items.length + 1)) / containerWidth)
+        );
+      }
+    };
+
+    getSizeContainer();
+
+    window.addEventListener("resize", getSizeContainer);
+
+    return () => {
+      window.removeEventListener("resize", getSizeContainer);
+    };
+  }, [items]);
+
   const handlePrev = () => {
     const newIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
     scrollToIndex(newIndex);
@@ -46,7 +71,6 @@ export default function Carousel({ items }: CarouselProps) {
     scrollToIndex(newIndex);
   };
 
-  // Funções de toque
   const handleTouchStart = (e: TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -84,36 +108,43 @@ export default function Carousel({ items }: CarouselProps) {
       >
         {items.map((item, index) => (
           <ResearchCard
-            key={index}
+            key={item.id}
             sx={{
               flexShrink: 0,
               scrollSnapAlign: "start",
               p: 2,
             }}
-            title={item.title}
-            active={item.status === "active"}
-            draft={item.status === "draft"}
+            title={item.name}
+            active={item.status === "Em Campo"}
+            draft={item.status === "Rascunho"}
           />
         ))}
+        <ResearchCard
+          key={items.length}
+          sx={{
+            flexShrink: 0,
+            scrollSnapAlign: "start",
+            p: 2,
+          }}
+          title={"Ver todas"}
+        />
       </Box>
 
       <Box
         sx={{
-          display: { xs: "flex", sm: "flex",  xl: "none" },
+          display: numberScroll === 1 ? "none" : "flex",
           justifyContent: "center",
           gap: 4,
           mt: 6,
         }}
       >
-        {items.map((_, index) => (
+        {Array.from({ length: numberScroll }).map((_, index) => (
           <Button
             key={index}
             onClick={() => scrollToIndex(index)}
             sx={{
-              minWidth: 6,
-              height: 6,
+              minWidth: 12,
               borderRadius: "50%",
-              mx: 0.6,
               bgcolor: index === currentIndex ? "primary.main" : "grey.300",
             }}
           />

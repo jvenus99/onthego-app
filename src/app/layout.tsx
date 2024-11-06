@@ -14,7 +14,7 @@ const publicSans = Public_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Home On The Go",
+  title: "On The Go",
   description: "Home Page",
   icons: [{ url: "/logo.svg" }],
 };

@@ -1,7 +1,11 @@
-import { Box, useTheme, Typography, Divider, Button } from "@mui/material";
+import { Box, Typography, Divider, Button } from "@mui/material";
 import { ArrowForward, FolderShared } from "@mui/icons-material";
-export default function AudienceSection() {
-  const theme = useTheme();
+
+interface Props {
+  contacts: number;
+}
+
+export default function AudienceSection(props: Props) {
   return (
     <section>
       <Box
@@ -11,10 +15,10 @@ export default function AudienceSection() {
           px: 10,
           pb: 10,
           height: "auto",
-          backgroundColor: theme.palette.secondary.main,
+          backgroundColor: "secondary.main",
           display: { xs: "block", sm: "block", md: "flex" },
           border: "1px solid",
-          borderColor: theme.palette.divider,
+          borderColor: "divider",
           flexDirection: "column",
         }}
       >
@@ -31,7 +35,7 @@ export default function AudienceSection() {
         </Typography>
         <Divider
           sx={{
-            color: (theme) => theme.palette.divider,
+            color: "divider",
             borderWidth: "1px",
             mt: 4,
           }}
@@ -45,7 +49,7 @@ export default function AudienceSection() {
         >
           <Box>
             <Typography variant="h3" sx={{ mt: 10 }}>
-              <b>4600</b>
+              <b>{props.contacts}</b>
             </Typography>
             <Typography variant="subtitle1">
               <b>Contatos</b>

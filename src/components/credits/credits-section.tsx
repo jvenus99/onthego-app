@@ -1,22 +1,30 @@
-import { Box, useTheme, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import CreditsCard from "@/components/credits/credits-card";
 import ButtonComponent from "@/components/shared/button";
-export default function CreditsSection() {
+
+interface Props {
+  running: number;
+  reserved: number;
+  available: number;
+}
+
+export default function CreditsSection(props: Props) {
   const theme = useTheme();
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
     <section>
       <Box
         sx={{
           pt: "12px",
           mx: { xs: 8, sm: 8, md: "10%" },
-          px: 10,
+          px: { xs: 10, sm: 10, xl: "10%" },
           pb: 10,
           height: "auto",
-          backgroundColor: theme.palette.secondary.main,
-          display: { xs: "block", sm: "block", md: "flex" },
+          backgroundColor: "secondary.main",
           border: "1px solid",
-          borderColor: theme.palette.divider,
-          flexDirection: "column",
+          width: { xl: "100%" },
+          borderColor: "divider",
         }}
       >
         <Typography
@@ -37,25 +45,27 @@ export default function CreditsSection() {
         >
           <CreditsCard
             title="Créditos disponíveis"
-            number={1500}
+            number={props.available}
             color="#0AD2A5"
-            sx={{ width: "100%" }}
+            sx={{ flex: { xl: 1 }, width: "100%" }}
           />
           <CreditsCard
             title="Créditos em campo"
-            number={300}
+            number={props.running}
             color="#C7B2FF"
-            sx={{ flex: 1, width: "50%" }}
+            sx={{ flex: 1, width: "100%" }}
           />
           <CreditsCard
             title="Créditos reservadps"
-            number={600}
+            number={props.reserved}
             shadow
             color="#000000"
-            sx={{ flex: 1, width: "50%" }}
+            sx={{ flex: 1, width: "100%" }}
           />
         </Box>
         <ButtonComponent
+          variant={isMdUp ? "outlined" : "contained"}
+          backgroundColor="secondary.main"
           text="Gerenciar créditos"
           sx={{ width: "100%", mt: 10 }}
         />

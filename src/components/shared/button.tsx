@@ -18,9 +18,10 @@ export default function ButtonComponent(props: ButtonProps) {
       sx={{
         p: 6,
         borderRadius: "4px",
-        background: props.backgroundColor
-          ? props.backgroundColor
-          : theme.palette.primary.main,
+        background:
+          props.variant !== "contained" && props.backgroundColor
+            ? props.backgroundColor
+            : theme.palette.primary.main,
         ...props.sx,
       }}
       endIcon={props.icon}

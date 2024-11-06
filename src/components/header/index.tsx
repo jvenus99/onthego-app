@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+import { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -17,7 +17,9 @@ import { CloseOutlined, MoreVert, Notifications } from "@mui/icons-material";
 import Image from "next/image";
 
 import "./styles.css";
-import DropdownMenu from "../shared/dropdown-menu";
+import DropdownMenu from "@/components/shared/dropdown-menu";
+import CommentsSection from "@/components/comments/comments-section";
+import { getNotifications, Notification } from "@/services/notifications";
 
 const navItems = [
   "pesquisa",
@@ -35,14 +37,33 @@ const user = {
 };
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
-  const handleDrawerToggle = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const notifications = await getNotifications();
+        setNotifications(notifications);
+      } catch (error) {
+        console.error("Error fetching notifications data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleDrawerMenu = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
+  const handleDrawerNotifications = () => {
+    setNotificationsOpen((prevState) => !prevState);
+  };
+
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+    <Box onClick={handleDrawerMenu} sx={{ textAlign: "center" }}>
       <div className="container-title-menu-mobile">
         <Image src="/acme.png" width={24} height={24} alt="Acme Corporation" />
         <Typography variant="h6" sx={{ my: 2 }}>
@@ -144,7 +165,7 @@ export default function Header() {
             color="inherit"
             aria-label="open drawer"
             edge="start"
-            onClick={handleDrawerToggle}
+            onClick={handleDrawerMenu}
             sx={{ mr: 2, display: { md: "none" } }}
           >
             {mobileOpen ? <CloseOutlined /> : <MenuIcon />}
@@ -158,7 +179,7 @@ export default function Header() {
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            // onClick={handleDrawerToggle}
+            onClick={handleDrawerNotifications}
             sx={{
               mr: "6px !important",
               display: { md: "none" },
@@ -227,7 +248,7 @@ export default function Header() {
           anchor="top"
           variant="persistent"
           open={mobileOpen}
-          onClose={handleDrawerToggle}
+          onClose={handleDrawerMenu}
           ModalProps={{
             keepMounted: true,
           }}
@@ -243,6 +264,9 @@ export default function Header() {
           {drawer}
         </Drawer>
       </nav>
+      <Drawer open={notificationsOpen} onClose={handleDrawerNotifications}>
+        <CommentsSection items={notifications} />
+      </Drawer>
       {mobileOpen && (
         <Box
           sx={{
@@ -251,10 +275,10 @@ export default function Header() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.5)", // Cor da sombra
-            zIndex: (theme) => theme.zIndex.drawer - 1, // Coloca a sombra abaixo do drawer
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: (theme) => theme.zIndex.drawer - 1,
           }}
-          onClick={handleDrawerToggle} // Fecha o drawer ao clicar na sombra
+          onClick={handleDrawerMenu}
         />
       )}
     </Box>

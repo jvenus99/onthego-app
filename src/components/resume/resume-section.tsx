@@ -7,6 +7,12 @@ import Image from "next/image";
 import ButtonComponent from "@/components/shared/button";
 import { Add } from "@mui/icons-material";
 
+interface CardProps {
+  running: { current: number; total: number };
+  audience: { balance: number; sended: number };
+  scripting: number;
+}
+
 const cards = [
   {
     activeNumbers: 0,
@@ -27,7 +33,7 @@ const cards = [
   },
 ];
 
-export default function ResumeSection() {
+export default function ResumeSection(props: CardProps) {
   const theme = useTheme();
   return (
     <section>
@@ -58,22 +64,51 @@ export default function ResumeSection() {
               gap: 8,
             }}
           >
-            {cards.map((card, index) => (
-              <Box
-                key={index}
-                sx={{
-                  flex: 1,
-                }}
-              >
-                <ResumeCard
-                  activeNumbers={card.activeNumbers}
-                  totalNumbers={card.totalNumbers}
-                  subTitle={card.subTitle}
-                  footerComponent={card.footerComponent}
-                  active={card.active}
-                />
-              </Box>
-            ))}
+            <Box
+              sx={{
+                flex: 1,
+              }}
+            >
+              <ResumeCard
+                activeNumbers={props.running.current}
+                totalNumbers={props.running.total}
+                subTitle={"Pesquisas em campo"}
+                footerComponent={
+                  <ProgessCircle
+                    activeNumbers={props.running.current}
+                    totalNumbers={props.running.total}
+                  />
+                }
+                active={true}
+              />
+            </Box>
+            <Box
+              sx={{
+                flex: 1,
+              }}
+            >
+              <ResumeCard
+                activeNumbers={props.scripting}
+                subTitle={"Pesquisas em roteirização"}
+              />
+            </Box>
+            <Box
+              sx={{
+                flex: 1,
+              }}
+            >
+              <ResumeCard
+                activeNumbers={props.audience.sended}
+                totalNumbers={props.audience.balance}
+                subTitle={"Disparos feitos"}
+                footerComponent={
+                  <ProgressBar
+                    activeNumbers={props.audience.sended}
+                    totalNumbers={props.audience.balance}
+                  />
+                }
+              />
+            </Box>
           </Box>
         </Box>
         <Box

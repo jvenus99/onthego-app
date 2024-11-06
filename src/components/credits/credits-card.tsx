@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { SxProps, Theme, useTheme } from "@mui/material";
+import { SxProps, Theme } from "@mui/material";
 
 interface Props {
   number: number;
@@ -15,17 +15,16 @@ interface Props {
 }
 
 export default function CreditsCard(props: Props) {
-  const theme = useTheme();
   return (
     <Card
       sx={{
-        background: theme.palette.secondary.main,
+        background: "secondary.main",
         width: "230px",
         minHeight: "138px",
         borderColor: props.color + "!important",
         border: "2px solid",
         borderBottom: "18px solid",
-        opacity: props.shadow ? 0.5 : 1, // Aplica opacidade condicionalmente
+        opacity: props.shadow ? 0.5 : 1,
         ...props.sx,
       }}
     >
@@ -40,7 +39,7 @@ export default function CreditsCard(props: Props) {
           <Typography
             variant="h3"
             sx={{
-              color: theme.palette.primary.main,
+              color: "primary.main",
               mb: 6,
               textAlign: "center",
             }}

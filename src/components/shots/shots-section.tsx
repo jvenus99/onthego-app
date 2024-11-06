@@ -1,7 +1,13 @@
 import { Box, useTheme, Typography, Divider, Button } from "@mui/material";
 import { ArrowForward, Email } from "@mui/icons-material";
 import ButtonComponent from "../shared/button";
-export default function ShotsSection() {
+
+interface Props{
+  sended: number;
+  balance: number;
+}
+
+export default function ShotsSection(props: Props) {
   const theme = useTheme();
   return (
     <section>
@@ -41,12 +47,12 @@ export default function ShotsSection() {
 
         <Box>
           <Typography variant="h3" sx={{ mt: 10 }}>
-            <b>2000</b>
+            <b>{props.sended}</b>
             <Typography
               variant="caption"
               sx={{ fontSize: "18px", color: theme.palette.secondary.light }}
             >
-              /10000
+              /{props.balance}
             </Typography>
           </Typography>
           <Typography variant="subtitle1">

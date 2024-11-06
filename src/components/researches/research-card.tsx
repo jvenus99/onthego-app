@@ -4,11 +4,8 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { SxProps, Theme, useTheme } from "@mui/material";
-import {
-  ArrowForward,
-  CircleRounded,
-} from "@mui/icons-material";
+import { SxProps, Theme } from "@mui/material";
+import { ArrowForward, CircleRounded } from "@mui/icons-material";
 import Image from "next/image";
 
 interface Props {
@@ -19,13 +16,12 @@ interface Props {
 }
 
 export default function ResearchCard(props: Props) {
-  const theme = useTheme();
   return (
     <>
       {props.title === "Ver todas" && (
         <Card
           sx={{
-            background: theme.palette.primary.main,
+            background: (theme) => theme.palette.primary.main,
             width: "230px",
             minHeight: "242px",
             border: "2px solid",
@@ -40,15 +36,13 @@ export default function ResearchCard(props: Props) {
               <Typography
                 variant="caption"
                 sx={{
-                  color: theme.palette.secondary.main,
+                  color: "secondary.main",
                   textTransform: "uppercase",
                 }}
               >
                 {props.title}
               </Typography>
-              <ArrowForward
-                sx={{ color: theme.palette.secondary.main, mt: 22 }}
-              />
+              <ArrowForward sx={{ color: "secondary.main", mt: 22 }} />
             </Box>
           </CardContent>
         </Card>
@@ -56,7 +50,7 @@ export default function ResearchCard(props: Props) {
       {props.title !== "Ver todas" && (
         <Card
           sx={{
-            background: theme.palette.secondary.main,
+            background: "secondary.main",
             width: "230px",
             minHeight: "242px",
             border: "2px solid",
@@ -84,16 +78,13 @@ export default function ResearchCard(props: Props) {
               <Typography
                 variant="caption"
                 sx={{
-                  color: theme.palette.primary.main,
+                  color: "primary.main",
                   textTransform: "uppercase",
                 }}
               >
                 {props.draft ? "Rascunho" : "Em campo"}
               </Typography>
-              <Typography
-                variant="h6"
-                sx={{ color: theme.palette.primary.main, mb: 6 }}
-              >
+              <Typography variant="h6" sx={{ color: "primary.main", mb: 6 }}>
                 <b>{props.title}</b>
               </Typography>
             </Box>

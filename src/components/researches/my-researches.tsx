@@ -1,15 +1,26 @@
 import { Box, Typography } from "@mui/material";
 import Carousel from "@/components/researches/carousel";
+import { use, useEffect } from "react";
 
-const items = [
-  { title: "Card 1", status: "active" },
-  { title: "Card 2", status: "draft" },
-  { title: "Card 3", status: "active" },
-  { title: "Card 4", status: "active" },
-  { title: "Ver todas", status: "none" },
-];
+interface Item {
+  name: string;
+  id: number;
+  status: string;
+}
 
-export default function MyResearches() {
+interface Props {
+  items: Item[];
+}
+
+// const items = [
+//   { title: "Card 1", status: "active" },
+//   { title: "Card 2", status: "draft" },
+//   { title: "Card 3", status: "active" },
+//   { title: "Card 4", status: "active" },
+//   { title: "Ver todas", status: "none" },
+// ];
+
+export default function MyResearches(props: Props) {
   return (
     <section>
       <Box
@@ -24,7 +35,7 @@ export default function MyResearches() {
         <Typography variant="h6" sx={{ mb: 10 }}>
           <b>Minhas Pesquisas</b>
         </Typography>
-        <Carousel items={items} />
+        <Carousel items={props.items} />
       </Box>
     </section>
   );
